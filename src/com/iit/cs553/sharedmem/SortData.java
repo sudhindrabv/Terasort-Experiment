@@ -16,6 +16,8 @@ public class SortData {
 	private double endChunckPerThread;
 //	private static double chunkSizeByRecordsInRAMPerThread;
 	private static double chunksPerThread;
+	public static long noOfTimesRead;
+	
 	
 
 //	private static double chunkSizeInRAMPerThreadInBytes;
@@ -109,6 +111,7 @@ public class SortData {
 	}
 
 	public List<Record> getNextRawChunk() {
+		noOfTimesRead++;
 		// all the chunks are read for thread
 		if (startChunckPerThread >= endChunckPerThread) {
 			try {

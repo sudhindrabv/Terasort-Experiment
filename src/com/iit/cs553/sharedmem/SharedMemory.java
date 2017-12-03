@@ -9,8 +9,10 @@ public class SharedMemory {
 
 	//fileSizeInBytes 124GB = 133143986200 1 TB = 1099511627800 1GB = 1073741800 30GB = 32212254700
 	public static void main(String[] args) {
+		long starts  = System.currentTimeMillis();
+		long end = 0;
 		int numOfThreads = 4;
-		double fileSizeInBytes = 32212254700;
+		double fileSizeInBytes = 1073741800.0;
 		SortData.initData(numOfThreads, "out", fileSizeInBytes);
 		ExecutorService es = Executors.newFixedThreadPool(numOfThreads);
 
@@ -52,6 +54,15 @@ public class SharedMemory {
 			}
 			
 		}
+	end  = System.currentTimeMillis();
+	double timeTaken = end - start /(1000 * 60);
+	System.out.println("Time taken in minutes : "+timeTaken);
+	System.out.println("Initial Map Phase number of times read :"++"written :"+);
+	System.out.println("Number of intermediate files created during map phase");
+	System.out.println("Available Ram size ");
+	System.out.println("Data under consideration");
+	System.out.println("Number of times merge happened");
+	System.out.println("Number of times read :"++"written :"+ +"during merge phase");
 
 	}
 }
@@ -68,6 +79,7 @@ class MergeThreadExecutor implements Runnable {
 
 class SortThreadExecutor implements Runnable {
 	private int threadId;
+	public static long noOfTimesWritten;
 
 	public SortThreadExecutor(int i) {
 		threadId = i;
@@ -149,6 +161,7 @@ class SortThreadExecutor implements Runnable {
 		System.out.println("Record List size"+recordList.size());
 		for (long counter = 0; counter < SortData.getNumChunksPerThread(); counter++) {
 			mergeSort(recordList, 0, recordList.size() - 1); // sort chunck
+			noOfTimesWritten++;
 			Utility.writeRecords(recordList, threadId, counter);
 			recordList = a.getNextRawChunk();
 		}

@@ -28,6 +28,8 @@ public class FilesMerge implements Runnable {
 	private List<Record> recordsToSort1;
 	private List<Record> recordsToSort2;
 
+	public static long noOfTimesWritten = 0 ;
+	publlic static long noOfTimesRead = 0;
 	public FilesMerge(int threadId) {
 		this.threadId = threadId;
 		findFilesForThreadToHandle(threadId);
@@ -136,7 +138,7 @@ public class FilesMerge implements Runnable {
 		int delta = filesToSort.size() % 2;
 
 		for (int i = 0; i < filesToSort.size() - delta - 1; i = i + 2) {
-			try {
+			try {	noOfTimesRead++;
 				String fileName = String.format("%d_%d_%d_out.tmp", threadId, i, phase);
 				sortedFile = new File(fileName);
 				pw = new PrintWriter(new FileOutputStream(sortedFile));
@@ -173,6 +175,7 @@ public class FilesMerge implements Runnable {
 	}
 
 	private void MergeRecordLists(PrintWriter pw) {
+		noOfTimesWritten++;
 		int i, j;
 		i = 0;
 		j = 0;
