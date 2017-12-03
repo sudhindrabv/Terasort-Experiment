@@ -7,11 +7,11 @@ import java.util.concurrent.Executors;
 
 public class SharedMemory {
 
-	//fileSizeInBytes 124GB = 133143986200 1 TB = 1099511627800 1GB = 1073741800
+	//fileSizeInBytes 124GB = 133143986200 1 TB = 1099511627800 1GB = 1073741800 30GB = 32212254700
 	public static void main(String[] args) {
 		int numOfThreads = 4;
-		double fileSizeInBytes = 1073741800;
-		SortData.initData(numOfThreads, "C:\\Projects\\JavaProjects\\Cloud\\SharedMemory\\out", fileSizeInBytes);
+		double fileSizeInBytes = 32212254700;
+		SortData.initData(numOfThreads, "out", fileSizeInBytes);
 		ExecutorService es = Executors.newFixedThreadPool(numOfThreads);
 
 		for (int i = 0; i < numOfThreads; i++) {
