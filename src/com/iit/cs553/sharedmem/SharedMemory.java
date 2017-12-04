@@ -9,8 +9,9 @@ public class SharedMemory {
 
 	//fileSizeInBytes 124GB = 133143986200 1 TB = 1099511627800 1GB = 1073741800 30GB = 32212254700
 	public static void main(String[] args) {
-		long starts  = System.currentTimeMillis();
+		long start  = System.currentTimeMillis();
 		long end = 0;
+		long MapPhaseFiles = 0;
 		int numOfThreads = 4;
 		double fileSizeInBytes = 1073741800.0;
 		SortData.initData(numOfThreads, "out", fileSizeInBytes);
@@ -26,6 +27,7 @@ public class SharedMemory {
 		}
 
 		int numberOfFiles = Utility.getIntermediateFilesInLocalDirectory().length;
+		MapPhaseFiles = numberOfFiles;
 		numOfThreads = numberOfFiles/2;
 		while (numberOfFiles >= 1) {
 			
@@ -57,12 +59,12 @@ public class SharedMemory {
 	end  = System.currentTimeMillis();
 	double timeTaken = end - start /(1000 * 60);
 	System.out.println("Time taken in minutes : "+timeTaken);
-	System.out.println("Initial Map Phase number of times read :"++"written :"+);
-	System.out.println("Number of intermediate files created during map phase");
-	System.out.println("Available Ram size ");
-	System.out.println("Data under consideration");
-	System.out.println("Number of times merge happened");
-	System.out.println("Number of times read :"++"written :"+ +"during merge phase");
+	System.out.println("Initial Map Phase number of times read :"+SortData.noOfTimesRead+"written :"+SortThreadExecutor.noOfTimesWritten);
+	System.out.println("Number of intermediate files created during map phase :"+MapPhaseFiles);
+	System.out.println("Available Ram size "+Utility.getRamSIze());
+	System.out.println("File size under consideration in bytes :"+fileSizeInBytes);
+	System.out.println("Number of times merge happened :"+FilesMerge.phase);
+	System.out.println("Number of times read :"+FilesMerge.noOfTimesRead+"written :"+FilesMerge.noOfTimesWritten +" during merge phase");
 
 	}
 }

@@ -15,7 +15,7 @@ public class FilesMerge implements Runnable {
 	private static long chunkSizeByRecords;
 	private static long numOfThreads;
 	private static int numberOfFiles;
-	private static int phase = 0;
+	public static int phase = 0;
 
 	private static int filesPerThread;
 	private static int noRecordsPerThread;
@@ -29,7 +29,7 @@ public class FilesMerge implements Runnable {
 	private List<Record> recordsToSort2;
 
 	public static long noOfTimesWritten = 0 ;
-	publlic static long noOfTimesRead = 0;
+	public static long noOfTimesRead = 0;
 	public FilesMerge(int threadId) {
 		this.threadId = threadId;
 		findFilesForThreadToHandle(threadId);
