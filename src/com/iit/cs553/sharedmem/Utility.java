@@ -16,11 +16,13 @@ import com.sun.management.OperatingSystemMXBean;
 
 public class Utility {
 	static final double TWOGB = 4294967296.0f;
+	static final double ONEGB = 1073741824.0f;
 
 	public static double getRamSIze() {
 		double memorySize = ((OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean())
 				.getTotalPhysicalMemorySize();
-		double finalSize = memorySize - TWOGB;
+		//double finalSize = memorySize - TWOGB;
+		double finalSize = memorySize;
 		return finalSize;
 	}
 

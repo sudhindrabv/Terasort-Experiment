@@ -1,5 +1,5 @@
 package com.iit.cs553.sharedmem;
-
+import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -7,13 +7,13 @@ import java.util.concurrent.Executors;
 
 public class SharedMemory {
 
-	//fileSizeInBytes 124GB = 133143986200 1 TB = 1099511627800 1GB = 1073741800 30GB = 32212254700
+	//fileSizeInBytes 124GB = 133143986200 1 TB = 1099511627800 1GB = 1073741800 30GB = 32212254700 8GB = 8589934500 128GB = 137438953400
 	public static void main(String[] args) {
 		long start  = System.currentTimeMillis();
 		long end = 0;
 		long MapPhaseFiles = 0;
 		int numOfThreads = 4;
-		double fileSizeInBytes = 1073741800.0;
+		double fileSizeInBytes = 137438953400.0;
 		SortData.initData(numOfThreads, "out", fileSizeInBytes);
 		ExecutorService es = Executors.newFixedThreadPool(numOfThreads);
 
@@ -61,8 +61,10 @@ public class SharedMemory {
 			
 		}
 	end  = System.currentTimeMillis();
-	double timeTaken = end - start /(1000 * 60);
-	System.out.println("Time taken in minutes : "+timeTaken);
+	long timeTaken = end - start ;
+	long minutes = TimeUnit.MILLISECONDS.toMinutes(timeTaken);
+	
+	System.out.println("Time taken in minutes : "+minutes);
 	System.out.println("Initial Map Phase number of times read :"+SortData.noOfTimesRead+"written :"+SortThreadExecutor.noOfTimesWritten);
 	System.out.println("Number of intermediate files created during map phase :"+MapPhaseFiles);
 	System.out.println("Available Ram size "+Utility.getRamSIze());
