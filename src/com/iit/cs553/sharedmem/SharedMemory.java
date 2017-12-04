@@ -29,12 +29,16 @@ public class SharedMemory {
 		int numberOfFiles = Utility.getIntermediateFilesInLocalDirectory().length;
 		MapPhaseFiles = numberOfFiles;
 		numOfThreads = numberOfFiles/2;
-		while (numberOfFiles >= 1) {
+		while (numberOfFiles > 1) {
 			
 			double chunkSizeByRecord = SortData.getChunkSizeByRecordsInRAMPerThread();
 			// mergeFiles();
 			Double db = new Double(chunkSizeByRecord);
+			try{
 			FilesMerge.initData(numOfThreads, db.intValue());
+			}catch (Exception e){
+				break;
+			}
 			es = Executors.newFixedThreadPool(numOfThreads);
 
 			for (int i = 0; i < numOfThreads; i++) {

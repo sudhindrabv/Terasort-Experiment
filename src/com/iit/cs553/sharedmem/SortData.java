@@ -16,7 +16,7 @@ public class SortData {
 	private double endChunckPerThread;
 //	private static double chunkSizeByRecordsInRAMPerThread;
 	private static double chunksPerThread;
-	public static long noOfTimesRead;
+	public static long noOfTimesRead= 0;
 	
 	
 
