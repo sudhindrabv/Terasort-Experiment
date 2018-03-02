@@ -1,0 +1,33 @@
+Size = Data size
+Files Merge= in merge face where files are read and written 
+noOfTimesRead
+noOfTimesWritten
+
+SortData = in initial map face number of time chunks are read
+noOfTimesRead
+
+SortThreadExecutor	= initial map face creating intermediate files
+noOfTimeswritten
+
+        end  = System.currentTimeMillis();
+        double timeTaken = end - start /(1000 * 60);
+        System.out.println("Time taken in minutes : "+timeTaken);
+        System.out.println("Initial Map Phase number of times read :"+SortData.noOfTimesRead+"written :"+SortData.noOfTimesWritten);
+        System.out.println("Number of intermediate files created during map phase");
+        System.out.println("Available Ram size getRamSIze());
+        System.out.println("File size under consideration in bytes :"+fileSizeInBytes);
+        System.out.println("Number of times merge happened :"+FilesMerge.phase");
+        System.out.println("Number of times read :"+FilesMerge.noOfTimesRead+"written :"+FilesMerge.noOfTimesWritten +" during merge phase");
+
+SharedMemory.java:60: error: cannot find symbol
+	double timeTaken = end - start /(1000 * 60);
+	                         ^
+  symbol:   variable start
+  location: class SharedMemory
+SharedMemory.java:62: error: cannot find symbol
+	System.out.println("Initial Map Phase number of times read :"+SortData.noOfTimesRead+"written :"+SortData.noOfTimesWritten);
+	                                                                                                         ^
+  symbol:   variable noOfTimesWritten
+  location: class SortData
+SharedMemory.java:66: error: phase has private access in FilesMerge
+	System.out.println("Number of times merge happened :"+FilesMerge.phase);
